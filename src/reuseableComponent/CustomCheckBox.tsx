@@ -1,15 +1,18 @@
-import React from "react";
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { TouchableOpacity, Text, StyleSheet, View } from "react-native";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
-const CustomCheckBox = ({ label, checked, onChange }) => {
+
+const CustomCheckBox = (props:{ label: any, checked: any, onChange: any }) => {
+  const {label , checked , onChange} = props
   return (
     <TouchableOpacity
       style={styles.container}
       onPress={() => onChange(!checked)}
     >
-      {/* <View style={[styles.checkbox, checked && styles.checked]}>
+      <View style={[styles.checkbox, checked && styles.checked]}>
         {checked && <Icon name="check" size={10} color="white" />}
-      </View> */}
+      </View>
       {label && <Text style={styles.label}>{label}</Text>}
     </TouchableOpacity>
   );

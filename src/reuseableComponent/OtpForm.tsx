@@ -1,147 +1,246 @@
-import { View, Text, TouchableOpacity, TextInput } from "react-native";
-import React, { useState } from "react";
 import CustomCheckBox from "./CustomCheckBox";
-
+import ReuseableButton from "./ReuseableButton";
+import React, { useRef, useState } from "react";
+import {
+    View,
+    TouchableOpacity,
+    TextInput,
+    StyleSheet,
+    TextInputKeyPressEventData,
+    Alert,
+    Text,
+} from "react-native";
+import CustomText from "./CustomText";
+import { useNavigation } from "@react-navigation/native";
 
 export default function OtpForm() {
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [isWhatsappNumber, setIsWhatsappNumber] = useState(false);
-    const [otp, setOtp] = useState(["", "", "", ""]);
-    const handleOtpChange = (index, value) => {
+    const [phoneNumber, setPhoneNumber] = useState<string>("");
+    const [isWhatsappNumber, setIsWhatsappNumber] = useState<boolean>(false);
+    const [otp, setOtp] = useState<string[]>(["", "", "", ""]);
+    const [show, setShow] = useState(false)
+    const [getOtp , setGetOtp] = useState("")
+    const navigation = useNavigation()
+
+    const refs = useRef<(TextInput | null)[]>([]);
+    const setRef = (index: number, ref: TextInput | null) => {
+        refs.current[index] = ref;
+    };
+
+    const handleGetOtp = () => {
+        if(!Number){
+            Alert.alert(
+                "Warning", 
+                "Please Enter Number", 
+                [
+                    {
+                        text: "Cancel",
+                        onPress: () => console.log("Cancel Pressed"),
+                        style: "cancel"
+                    },
+                    { text: "OK", onPress: () => console.log("OK Pressed") }
+                ],
+                { cancelable: false }
+            );
+            return;
+        }
+        console.log(phoneNumber.length)
+        if(phoneNumber.length!=10){
+            Alert.alert(
+                "Warning", 
+                "Please Enter Valid  Number", 
+                [
+                    {
+                        text: "Cancel",
+                        onPress: () => console.log("Cancel Pressed"),
+                        style: "cancel"
+                    },
+                    { text: "OK", onPress: () => console.log("OK Pressed") }
+                ],
+                { cancelable: false }
+            );
+            return;
+        }
+        else{
+            // generateOtp({setGetOtp})
+            setShow(true)
+        }
+    
+    };
+
+    const handleOtpChange = (index: number, value: string) => {
         const newOtp = [...otp];
         newOtp[index] = value;
         setOtp(newOtp);
+        if (value !== "" && index < otp.length - 1) {
+            refs.current[index + 1]?.focus();
+        }
     };
-    const HandleIsWhatsappNumber = () => {
+
+    const handleKeyPress = (index: number, key: string) => {
+        if (key === "Backspace" && otp[index] === "" && index > 0) {
+            refs.current[index - 1]?.focus();
+        } else if (key === "Backspace" && otp[index] !== "") {
+            handleOtpChange(index, "");
+        }
+    };
+
+    const handleIsWhatsappNumber = () => {
         setIsWhatsappNumber(!isWhatsappNumber);
     };
+    const handleVerify =() => {
+       if(otp.length==4){
+        navigation.navigate("Register")
+       }
+    }
+
     return (
         <View>
-            <View style={{ padding: 20 }}>
-                <Text
-                    style={{
-                        color: "#1D71D4",
-                        fontSize: 16,
-                        fontWeight: "600",
-                    }}
-                >
-                    Verify your mobile number
-                </Text>
-                <View
-                    style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: 10,
-                    }}
-                >
-                    <TextInput
-                        inputMode="numeric"
-                        style={{
-                            marginVertical: 10,
-                            borderWidth: 2,
-                            borderColor: "#4A90E2",
-                            paddingHorizontal: 10,
-                            paddingVertical: 5,
-                            borderRadius: 15,
-                            flex: 1,
-                        }}
-                        placeholder="Enter your mobile number "
-                        onChangeText={(val) => {
-                            setPhoneNumber(val);
-                        }}
-                    ></TextInput>
-
+            <View style={[styles.containerA]}>
+                <CustomText
+                    content="Verify your mobile number"
+                    style={styles.verifyText}
+                />
+                <View style={styles.containerForInputBtn}>
+                   
+                   <View  style={styles.inputForMobNum }>
+                   <Text style={{color:'black' , margin:15, fontWeight:'500'}}>
+                    +91
+                   </Text>
+                     <TextInput
+                        keyboardType="numeric"
+                        maxLength={10}
+                        style={{color:'black'}}
+                        placeholderTextColor={"gray"}
+                        placeholder="Enter your mobile number"
+                        onChangeText={(val) => setPhoneNumber(val)}
+                        value={phoneNumber}
+                    />
+                    </View>
                     <TouchableOpacity
-                        style={{
-                            borderRadius: 15,
-                            backgroundColor: "#C7DDF6",
-                            padding: 10,
-                        }}
+                        style={styles.btnForGetOtp}
+                        onPress={handleGetOtp}
                     >
-                        <Text style={{ fontWeight: 500, color: "#263238" }}>Get OTP</Text>
+                        <CustomText
+                            content="Get OTP"
+                            style={[styles.txtForGetOtp, { fontWeight: "500" }]}
+                        />
                     </TouchableOpacity>
                 </View>
-                <View
-                    style={{
-                        flexDirection: "row",
-                        alignItems: "center",
-                        justifyContent: "left",
-                    }}
-                >
-                    <Text style={{ fontSize: 12 }}>This is my WhatsApp Number</Text>
+                <View style={styles.containerMyWappNum}>
+                    <CustomText
+                        content="This is my WhatsApp Number"
+                        style={styles.txtMyWappNum}
+                    />
                     <CustomCheckBox
                         checked={isWhatsappNumber}
-                        onChange={() => HandleIsWhatsappNumber()} label={undefined} />
+                        onChange={handleIsWhatsappNumber} label={""} />
                 </View>
             </View>
-            <View style={{ marginHorizontal: 20 }}>
-                <Text
-                    style={{
-                        color: "#1D71D4",
-                        fontSize: 16,
-                        fontWeight: "600",
-                    }}
-                >
-                    Enter OTP
-                </Text>
-
-                <View
-                    style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        gap: 4,
-                        marginVertical: 10,
-                    }}
-                >
-                    {otp.map((a, i) => {
-                        return (
+                <View style={{marginHorizontal: 20 , opacity:!show? 0:1}}>
+                    <CustomText content="Enter OTP" style={styles.txtEnterOtp} />
+                    <View style={styles.containerOtpInputs}>
+                        {otp.map((value, index) => (
                             <TextInput
-                                key={i}
+                                key={index}
                                 keyboardType="number-pad"
-                                style={{
-                                    borderWidth: 2,
-                                    borderColor: "#4A90E2",
-                                    paddingHorizontal: 10,
-                                    paddingVertical: 5,
-                                    borderRadius: 15,
-                                    textAlign: "center",
-                                }}
-                                onChangeText={(text) => {
-                                    handleOtpChange(text.indexOf, text.valueOf);
-                                }}
+                                style={styles.inputOtp}
+                                onChangeText={(text) => handleOtpChange(index, text)}
                                 maxLength={1}
-                            ></TextInput>
-                        );
-                    })}
+                                onKeyPress={({ nativeEvent }: { nativeEvent: TextInputKeyPressEventData }) =>
+                                    handleKeyPress(index, nativeEvent.key)
+                                }
+                                ref={(ref) => setRef(index, ref)}
+                                value={value}
+                            />
+                        ))}
+                    </View>
+                    <View style={styles.containerDidnotRecieveResend}>
+                        <CustomText
+                            content="Didn't Recieve OTP?"
+                            style={styles.txtDidnotRecieve}
+                        />
+                        <TouchableOpacity>
+                            <CustomText content="Resend" style={styles.txtResend} />
+                        </TouchableOpacity>
+                    </View>
+                    <ReuseableButton buttonTittle={"Verify"} onPress={handleVerify} />
                 </View>
-                <View style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "ce",
-                }}
-                >
-                    <Text style={{ fontSize: 12 }}>Didn't Recieve OTP? </Text>
-                    <TouchableOpacity>
-                        <Text style={{ color: "black", fontWeight: "900" }}>Resend</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <TouchableOpacity
-                    style={{
-                        backgroundColor: "#1D71D4",
-                        padding: 10,
-                        marginVertical: 20,
-                        borderRadius: 15,
-                        marginHorizontal: 30,
-                    }}
-                >
-                    <Text style={{ color: "white", textAlign: "center", fontSize: 16 }}>
-                        Verify
-                    </Text>
-                </TouchableOpacity>
-            </View>
+            
         </View>
-    );
+
+
+    )
 }
+
+const styles = StyleSheet.create({
+    containerA: { padding: 20 },
+    verifyText: {
+        color: "#1D71D4",
+        fontSize: 16,
+        fontWeight: "600",
+    },
+    containerForInputBtn: {
+        display: "flex",
+        marginTop:10,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 10,
+    },
+    inputForMobNum: {
+        borderWidth: 1,
+        borderColor: "#4A90E2",
+        borderRadius: 15,
+        flex: 1,
+        flexDirection:'row',
+        color:'black'
+    },
+    btnForGetOtp: {
+        borderRadius: 15,
+        backgroundColor: "#C7DDF6",
+        padding: 10,
+    },
+    txtForGetOtp: { color: "#263238" },
+    containerMyWappNum: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "flex-start",
+    },
+    txtMyWappNum: { fontSize: 12 },
+    containerB: { marginHorizontal: 20  },
+    txtEnterOtp: {
+        color: "#1D71D4",
+        fontSize: 16,
+        fontWeight: "600",
+    },
+    containerOtpInputs: {
+        display: "flex",
+        flexDirection: "row",
+        gap: 4,
+        marginVertical: 10,
+    },
+    inputOtp: {
+        borderWidth: 2,
+        borderColor: "#4A90E2",
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        borderRadius: 15,
+        textAlign: "center",
+    },
+    containerDidnotRecieveResend: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    txtDidnotRecieve: { fontSize: 12, color: "black" },
+    txtResend: { color: "black", fontWeight: "900" },
+    btnVerify: {
+        backgroundColor: "#1D71D4",
+        padding: 10,
+        marginVertical: 20,
+        borderRadius: 15,
+        marginHorizontal: 30,
+    },
+    txtVerify: { color: "white", textAlign: "center", fontSize: 16 },
+});

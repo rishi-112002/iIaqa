@@ -1,10 +1,9 @@
 import React from "react";
 import { View } from "react-native";
-import SplashScreen from "../screen/SplashScreen";
-import OTPLogin from "../screen/LoginByOtp";
+import AppNavigation from "../navigation/AppNavgation";
 function AppMain() {
     return (<View style={{ flex: 1 }}>
-        <SplashScreen/>
+        <AppNavigation />
     </View>)
 }
 export default AppMain;

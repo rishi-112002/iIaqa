@@ -12,7 +12,7 @@ export default function Welcome() {
         justifyContent: "center",
         gap: 50,
         marginHorizontal: 50,
-        marginTop: 40,
+        marginTop: 20,
       }}
     >
       <Image

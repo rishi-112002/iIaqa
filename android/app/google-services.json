@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "968519341613",
+    "project_id": "ilaqa-ed7c5",
+    "storage_bucket": "ilaqa-ed7c5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968519341613:android:fae610498e0396d5cfcaa4",
+        "android_client_info": {
+          "package_name": "com.ilaqa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUmnGS9IDAuzme2pjE2CRV5JfExW8Txi8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
