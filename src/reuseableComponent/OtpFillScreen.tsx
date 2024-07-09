@@ -13,10 +13,12 @@ import {
 import CustomText from "./CustomText";
 import { useNavigation } from "@react-navigation/native";
 
-export default function OtpForm() {
+export default function OtpFillScreen() {
     const [phoneNumber, setPhoneNumber] = useState<string>("");
     const [isWhatsappNumber, setIsWhatsappNumber] = useState<boolean>(false);
     const [otp, setOtp] = useState<string[]>(["", "", "", ""]);
+    const [show, setShow] = useState(false)
+    const [getOtp , setGetOtp] = useState("")
     const navigation = useNavigation()
 
     const refs = useRef<(TextInput | null)[]>([]);
@@ -59,7 +61,8 @@ export default function OtpForm() {
             return;
         }
         else{
-          navigation.navigate("OtpScreen")
+            // generateOtp({setGetOtp})
+            setShow(true)
         }
     
     };
@@ -86,13 +89,13 @@ export default function OtpForm() {
     };
     const handleVerify =() => {
        if(otp.length==4){
-        navigation.navigate("OtpScreen")
+        navigation.navigate("Register")
        }
     }
 
     return (
         <View>
-            <View style={[styles.containerA]}>
+            <View style={{padding: 20 , opacity:0.3}} pointerEvents="none">
                 <CustomText
                     content="Verify your mobile number"
                     style={styles.verifyText}
@@ -108,9 +111,7 @@ export default function OtpForm() {
                         maxLength={10}
                         style={{color:'black'}}
                         placeholderTextColor={"gray"}
-                        placeholder="Enter your mobile number"
-                        onChangeText={(val) => setPhoneNumber(val)}
-                        value={phoneNumber}
+                        value={"*******09"}
                     />
                     </View>
                     <TouchableOpacity
@@ -129,11 +130,11 @@ export default function OtpForm() {
                         style={styles.txtMyWappNum}
                     />
                     <CustomCheckBox
-                        checked={isWhatsappNumber}
+                        checked={true}
                         onChange={handleIsWhatsappNumber} label={""} />
                 </View>
             </View>
-                <View style={{marginHorizontal: 20 , opacity:0.2}} pointerEvents="none">
+                <View style={{marginHorizontal: 20 , opacity:1}}>
                     <CustomText content="Enter OTP" style={styles.txtEnterOtp} />
                     <View style={styles.containerOtpInputs}>
                         {otp.map((value, index) => (

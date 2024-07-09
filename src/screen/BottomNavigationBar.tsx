@@ -3,6 +3,8 @@ import { Image, KeyboardAvoidingView, Platform, StyleSheet, Text, View } from "r
 import { useTheme } from '@react-navigation/native';
 import WelcomeScreen from "./authenticate/SplashScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Drawer from "../reuseableComponent/Drawer";
+import Home from "./tabScreen/Home";
 const Tab = createBottomTabNavigator();
 export function BottomNavigationBar() {
     const { colors, dark } = useTheme();
@@ -46,7 +48,7 @@ export function BottomNavigationBar() {
             >
                 <Tab.Screen
                     name="0"
-                    component={WelcomeScreen}
+                    component={Drawer}
 
                     options={{
                         tabBarLabel: ({ focused }) => (
