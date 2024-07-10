@@ -5,6 +5,8 @@ import WelcomeScreen from "./authenticate/SplashScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Drawer from "../reuseableComponent/Drawer";
 import Home from "./tabScreen/Home";
+import GroupScreen from "./tabScreen/GroupScreen";
+import ChatScreen from "./tabScreen/ChatScreen";
 const Tab = createBottomTabNavigator();
 export function BottomNavigationBar() {
     const { colors, dark } = useTheme();
@@ -19,7 +21,7 @@ export function BottomNavigationBar() {
                 screenOptions={{
                     tabBarStyle: {
                         position: "absolute",
-                        bottom: 10,
+                        bottom: 5,
                         left: 10,
                         right: 10,
                         borderRadius: 20,
@@ -121,7 +123,7 @@ export function BottomNavigationBar() {
 
                 <Tab.Screen
                     name="Library"
-                    component={WelcomeScreen}
+                    component={GroupScreen}
                     options={{
                         tabBarLabel: ({ focused }) => (
                             <Text style={{ fontSize: 12, color: focused ? "#0077FF" : colors.text }}>
@@ -141,7 +143,7 @@ export function BottomNavigationBar() {
                     }} />
                 <Tab.Screen
                     name="Account"
-                    component={WelcomeScreen}
+                    component={ChatScreen}
                     options={{
                         tabBarLabel: ({ focused }) => (
                             <Text style={{ fontSize: 12, color: focused ? "#0077FF" : colors.text }}>

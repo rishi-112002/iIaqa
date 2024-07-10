@@ -4,7 +4,7 @@ function HomeDirectMessageComponent(props: { item: any }) {
     const { item } = props
     return (
         <View style={styles.itemContainer}>
-            <View style={{ backgroundColor: "#D3E3F6", borderRadius: 30, height: 45, width: 45, padding: 4, marginEnd: 5, marginTop: 3 }}>
+            <View style={{ backgroundColor: "#D3E3F6", borderRadius: 30,justifyContent:'center',alignItems:"center", height: 45, width: 45, padding: 4, marginEnd: 5, marginTop: 3 }}>
                 <Image source={item.avatar} style={styles.icon} />
             </View>
             <View style={styles.textContainer}>
@@ -22,12 +22,11 @@ function HomeDirectMessageComponent(props: { item: any }) {
 const styles = StyleSheet.create({
     itemContainer: {
         flexDirection: 'row',
+        backgroundColor:'white',
         padding: 10,
         marginBottom: 10,
     },
     icon: {
-        width: 45,
-        height: 45,
         resizeMode: 'contain',
         position: 'absolute'
     },
@@ -35,18 +34,22 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     groupName: {
-        fontWeight: 'bold',
-        fontSize: 16,
+        fontWeight: '700',
+        fontSize: 12,
+        fontFamily:'Jost',
         color: "#000000"
     },
     time: {
         color: '#000000',
         marginBottom: 5,
-        fontWeight: 'black',
-        fontSize: 10,
+        fontWeight: '700',
+        fontSize: 9,
+        fontFamily:'Jost',
     },
     message: {
         fontSize: 12,
+        fontFamily:'Jost',
+        fontWeight:'400',
         color: '#000000',
     },
     admin: {
