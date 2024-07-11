@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Alert } from 'react-native';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
+import { DrawerActions, useNavigation } from '@react-navigation/native';
 
 function CustomDrawerContent() {
+    const navigation = useNavigation()
     return (
         <DrawerContentScrollView  style={{
             backgroundColor: "#C7DDF6"
@@ -25,19 +27,24 @@ function CustomDrawerContent() {
                 </View>
             </View>
             <DrawerItem
+                label="Home"
+                onPress={() => navigation.navigate("Home")}
+                style={{backgroundColor:'#E5ECF5'}}
+            />
+            <DrawerItem
                 label="Vendor Blacklists"
                 onPress={() => Alert.alert('Vendor Blacklists')}
                 style={{backgroundColor:'#E5ECF5'}}
             />
             <DrawerItem
                 label="Shops Near you"
-                onPress={() => Alert.alert('Shops Near you')}
+                onPress={() => navigation.navigate("ShopNearYou")}
                 style={{backgroundColor:'#E5ECF5'}}
 
             />
             <DrawerItem
                 label="Emergency Contacts"
-                onPress={() => Alert.alert('Emergency Contacts')}
+                onPress={() => navigation.navigate("EmergencyContacts")}
                 style={{backgroundColor:'#E5ECF5'}}
 
             />

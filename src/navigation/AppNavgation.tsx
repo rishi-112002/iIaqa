@@ -7,7 +7,8 @@ import { BottomNavigationBar } from "../screen/BottomNavigationBar";
 import OTPLogin from "../screen/authenticate/LoginByOtp";
 import RegisterScreen from "../screen/authenticate/RegisterScreen";
 import OtpScreen from "../screen/authenticate/OtpScreen";
-import Drawer from "../reuseableComponent/Drawer";
+import Drawer from "../screen/drawerScreen/Drawer";
+import { DrawerProvider } from "../DrowerContext";
 const AuthStack = createNativeStackNavigator();
 function AppNavigation() {
     const scheme = useColorScheme();
@@ -28,6 +29,7 @@ function AppNavigation() {
     console.log("theme", theme)
     return (
         <ThemeProvider value={theme}>
+            <DrawerProvider>
             <NavigationContainer theme={theme}>       
                     <AuthStack.Navigator>
                         <AuthStack.Screen name='Login' component={OTPLogin} options={{ headerShown: false }} />
@@ -37,6 +39,7 @@ function AppNavigation() {
                         <AuthStack.Screen name='Drawer' component={Drawer} options={{ headerShown: false }} />    
                     </AuthStack.Navigator>
                     </NavigationContainer>
+                    </DrawerProvider>
                 </ThemeProvider>
         
             )

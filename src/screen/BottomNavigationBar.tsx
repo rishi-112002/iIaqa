@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Image, KeyboardAvoidingView, Platform, StyleSheet, Text, View } from "react-native";
 import { useTheme } from '@react-navigation/native';
 import WelcomeScreen from "./authenticate/SplashScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Drawer from "../reuseableComponent/Drawer";
+import Drawer from "./drawerScreen/Drawer";
 import Home from "./tabScreen/Home";
 import GroupScreen from "./tabScreen/GroupScreen";
 import ChatScreen from "./tabScreen/ChatScreen";
+import { DrawerContext } from "../DrowerContext";
 const Tab = createBottomTabNavigator();
 export function BottomNavigationBar() {
     const { colors, dark } = useTheme();
@@ -15,9 +16,8 @@ export function BottomNavigationBar() {
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             style={{ flex: 1 }}
         >
-            <Tab.Navigator
+              <Tab.Navigator
                 initialRouteName="Home"
-
                 screenOptions={{
                     tabBarStyle: {
                         position: "absolute",
@@ -35,9 +35,8 @@ export function BottomNavigationBar() {
                         },
                         shadowOpacity: 0.25,
                         shadowRadius: 3.5,
-                        elevation: 5
+                        elevation: 5,
                     },
-
                     tabBarActiveTintColor: "#0077FF",
                     tabBarInactiveTintColor: 'pink',
                     tabBarLabel: ({ focused }) => (
@@ -45,7 +44,7 @@ export function BottomNavigationBar() {
                             YourTabLabel
                         </Text>
                     ),
-                    tabBarHideOnKeyboard: true
+                    tabBarHideOnKeyboard: true,
                 }}
             >
                 <Tab.Screen

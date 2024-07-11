@@ -4,7 +4,7 @@ function HomeDirectMessageComponent(props: { item: any }) {
     const { item } = props
     return (
         <View style={styles.itemContainer}>
-            <View style={{ backgroundColor: "#D3E3F6", borderRadius: 30,justifyContent:'center',alignItems:"center", height: 45, width: 45, padding: 4, marginEnd: 5, marginTop: 3 }}>
+            <View style={{ backgroundColor: "#D3E3F6", borderRadius: 30, justifyContent: 'center', alignItems: "center", height: 45, width: 45, padding: 4, marginEnd: 5, marginTop: 3 }}>
                 <Image source={item.avatar} style={styles.icon} />
             </View>
             <View style={styles.textContainer}>
@@ -16,13 +16,14 @@ function HomeDirectMessageComponent(props: { item: any }) {
                     {item.message}
                 </Text>
             </View>
+            <View style={{ backgroundColor: '#A6BAD2', height: 0.1 }} />
         </View>
     )
 }
 const styles = StyleSheet.create({
     itemContainer: {
         flexDirection: 'row',
-        backgroundColor:'white',
+        backgroundColor: 'white',
         padding: 10,
         marginBottom: 10,
     },
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
     groupName: {
         fontWeight: '700',
         fontSize: 12,
-        fontFamily:'Jost',
+        fontFamily: 'Jost',
         color: "#000000"
     },
     time: {
@@ -44,12 +45,12 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         fontWeight: '700',
         fontSize: 9,
-        fontFamily:'Jost',
+        fontFamily: 'Jost',
     },
     message: {
         fontSize: 12,
-        fontFamily:'Jost',
-        fontWeight:'400',
+        fontFamily: 'Jost',
+        fontWeight: '400',
         color: '#000000',
     },
     admin: {
