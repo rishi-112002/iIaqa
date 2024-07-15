@@ -1,77 +1,11 @@
 import React, { useState } from "react";
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import CustomSearchbar from "../../reuseableComponent/CustomSearchBar";
 import HomeDirectMessageComponent from "../../reuseableComponent/HomeDirectMessageComponent";
-type messageType = "All" | "Unread" | "Neighborhood"
-const allTypes: { [key in messageType]: { id: number; name: string; avatar: any; time: any; message: any }[] } = {
-    All: [
-        {
-            name: "Your iLaqa Agent",
-            time: "Today 11:21 AM",
-            message: "Have you ever booked any service with them. What will be your feedback?",
-            avatar: require('../../../src/assests/images/dummyAssets/communitymanager.png'),
-            id: 1
-        },
-        {
-            name: "Piyush",
-            time: "Today 11:21 AM",
-            message: "Have you ever booked any service with them. What will be your feedback?",
-            avatar: require('../../../src/assests/images/userIcon3.png'),
-            id: 2
-        },
-        {
-            name: "Rahul",
-            time: "Today 11:31 AM",
-            message: "Hi, I have forwarded my CV. Can you please forward to your HR",
-            avatar: require('../../../src/assests/images/userIcon2.png'),
-            id: 3
-        }],
-    Unread: [
-        {
-            name: "Your iLaqa Agent",
-            time: "Today 11:21 AM",
-            message: "Have you ever booked any service with them. What will be your feedback?",
-            avatar: require('../../../src/assests/images/dummyAssets/communitymanager.png'),
-            id: 1
-        },
-        {
-            name: "Rajesh",
-            time: "Today 11:21 AM",
-            message: "Have you ever booked any service with them. What will be your feedback?",
-            avatar: require('../../../src/assests/images/userIcon3.png'),
-            id: 2
-        },
-        {
-            name: "umar",
-            time: "Today 11:31 AM",
-            message: "Hi, I have forwarded my CV. Can you please forward to your HR",
-            avatar: require('../../../src/assests/images/userIcon2.png'),
-            id: 3
-        }],
-    Neighborhood: [
-        {
-            name: "Your iLaqa Agent",
-            time: "Today 11:21 AM",
-            message: "Have you ever booked any service with them. What will be your feedback?",
-            avatar: require('../../../src/assests/images/dummyAssets/communitymanager.png'),
-            id: 1
-        },
-        {
-            name: "raju",
-            time: "Today 11:21 AM",
-            message: "Have you ever booked any service with them. What will be your feedback?",
-            avatar: require('../../../src/assests/images/userIcon3.png'),
-            id: 2
-        },
-        {
-            name: "gajodhar",
-            time: "Today 11:31 AM",
-            message: "Hi, I have forwarded my CV. Can you please forward to your HR",
-            avatar: require('../../../src/assests/images/userIcon2.png'),
-            id: 3
-        }],
-
-};
+import { SectionList } from "react-native";
+import chatData, { messageType } from "../../dummyData/forChatScreen";
+import NeighboursData from "../../dummyData/forNeighours";
+import ImageComponent from "../../reuseableComponent/ImageComponent";
 function ChatScreen() {
     const [selectedType, setSelectedType] = useState<messageType>("All")
     return (
@@ -88,12 +22,30 @@ function ChatScreen() {
                     <Text style={[styles.navButtonText, selectedType == "Neighborhood" && styles.navButtonSelectedText]}>Neighborhood</Text>
                 </TouchableOpacity>
             </View>
-            <FlatList
-                data={allTypes[selectedType]}
-                renderItem={({ item }) => <HomeDirectMessageComponent item={item} />}
-                keyExtractor={(item) => item.id.toString()}
-                contentContainerStyle={{ padding: 5 }}
-            />
+            {selectedType != "Neighborhood" ?
+                <FlatList
+                    data={chatData[selectedType]}
+                    renderItem={({ item }) => <HomeDirectMessageComponent item={item} />}
+                    keyExtractor={(item) => item.id.toString()}
+                    contentContainerStyle={{ padding: 5 }}
+                /> :
+                <SectionList
+                    sections={NeighboursData}
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={() => null}
+                    renderSectionHeader={({ section }) => (
+                        <View style={styles.sectionContainer}>
+                            <Text style={styles.header}>{section.title}</Text>
+                            <ScrollView horizontal contentContainerStyle={styles.imageRow}>
+                                {section.data.map(item => (
+                                    <ImageComponent key={item.id} item={item} />
+                                ))}
+                            </ScrollView>
+                        </View>
+                    )}
+                    contentContainerStyle={{ padding: 5, paddingBottom: 47 }}
+                />
+            }
 
         </View>
     )
@@ -128,6 +80,22 @@ const styles = StyleSheet.create({
     },
     groupsContainer: {
 
+    },
+    sectionContainer: {
+        paddingEnd:10,
+        paddingStart:10
+      },
+      imageRow: {
+        flexDirection: 'row',
+        paddingHorizontal: 10,
+      },
+    header: {
+        fontSize: 14,
+        fontFamily:'Jost',
+        color:'black',
+        fontWeight: '800',
+        marginVertical: 10,
+        marginHorizontal: 10
     },
     groupItem: {
         width: 113,

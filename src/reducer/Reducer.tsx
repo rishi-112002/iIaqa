@@ -1,9 +1,8 @@
-
 import { combineReducers } from 'redux';
-import drawerReducer from './drawerReducer';
+import DrawerReducer from './DrawerReducer';
 
 const rootReducer = combineReducers({
-  drawer: drawerReducer,
+  drawer: DrawerReducer,
 });
 
 export default rootReducer;

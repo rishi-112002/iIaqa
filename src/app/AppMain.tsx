@@ -7,13 +7,14 @@ import { BottomNavigationBar } from "../screen/BottomNavigationBar";
 import { Provider } from "react-redux";
 import store from "../reducer/Store";
 function AppMain() {
-    return (<View style={{ flex: 1 }}>
-        <Provider store={store}>
-       <NavigationContainer>
-          <BottomNavigationBar/>
-          </NavigationContainer>
-          </Provider>
-      
-    </View>)
+    return (
+        <View style={{ flex: 1 }}>
+            <Provider store={store}>
+                <NavigationContainer>
+                    <BottomNavigationBar />
+                </NavigationContainer>
+            </Provider>
+        </View>
+    )
 }
 export default AppMain;

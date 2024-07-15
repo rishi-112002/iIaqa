@@ -1,10 +1,36 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Alert } from 'react-native';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
-import { DrawerActions, useNavigation } from '@react-navigation/native';
-
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { setDrawerOpen } from '../reducer/DrawerReducer';
+ export type Screens = "Home" | "ShopNearYou" | "EmergencyContacts" | "VendorList"
 function CustomDrawerContent() {
     const navigation = useNavigation()
+    const dispatch = useDispatch();
+    const toggleDrawer = () => {
+      dispatch(setDrawerOpen(false));
+    };
+    const toggleDrawerTrue = () => {
+        dispatch(setDrawerOpen(true));
+      };
+    const onHomeClick=()=>{
+        toggleDrawerTrue()
+        navigation.navigate("Home")
+    }
+    const onShopsClick=()=>{
+        toggleDrawer()
+        navigation.navigate("ShopNearYou")
+    }
+    const onEmergencyClick=()=>{
+        toggleDrawer()
+        navigation.navigate("EmergencyContacts")
+    }
+    const onVendorListClick=()=>{
+        toggleDrawerTrue()
+        navigation.navigate("VendorList")
+    }
+
     return (
         <DrawerContentScrollView  style={{
             backgroundColor: "#C7DDF6"
@@ -28,23 +54,23 @@ function CustomDrawerContent() {
             </View>
             <DrawerItem
                 label="Home"
-                onPress={() => navigation.navigate("Home")}
+                onPress={onHomeClick}
                 style={{backgroundColor:'#E5ECF5'}}
             />
             <DrawerItem
                 label="Vendor Blacklists"
-                onPress={() => Alert.alert('Vendor Blacklists')}
+                onPress={onVendorListClick}
                 style={{backgroundColor:'#E5ECF5'}}
             />
             <DrawerItem
                 label="Shops Near you"
-                onPress={() => navigation.navigate("ShopNearYou")}
+                onPress={onShopsClick}
                 style={{backgroundColor:'#E5ECF5'}}
 
             />
             <DrawerItem
                 label="Emergency Contacts"
-                onPress={() => navigation.navigate("EmergencyContacts")}
+                onPress={onEmergencyClick}
                 style={{backgroundColor:'#E5ECF5'}}
 
             />

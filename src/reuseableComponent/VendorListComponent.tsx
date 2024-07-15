@@ -1,23 +1,32 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 
-function HomeScreeenGroupsComponent(props: { item: any }) {
+function VendorListComponent(props: { item: any }) {
     const { item } = props
     console.log("items is :" , item)
     return (
+        <View>
         <View style={styles.itemContainer}>
             <View style={{ backgroundColor: "#D3E3F6", borderRadius: 30, height: 48, width: 48, padding: 2 , marginEnd:5, marginTop:3,}}>
-                <Image source={item.icon} style={styles.icon} />
+                <Image source={item.imagePath} style={styles.icon} />
             </View>
             <View style={styles.textContainer}>
                 <View style={{flexDirection:'row', justifyContent:'space-between'}}> 
-                    <Text style={styles.groupName}>{item.groupName}</Text>
-                    <Text style={styles.time}>{item.time}</Text>
+                    <Text style={styles.groupName}>{item.name}</Text>
+                    <Text style={styles.time}>{item.role}</Text>
                 </View>
                 <Text style={styles.message}>
-          <Text style={styles.admin}>Admin: </Text>
-          {item.message}
+          <Text style={styles.admin}>Reason: </Text>
+          {item.reason}
         </Text>
             </View>
+        </View>
+        <View style={{
+              backgroundColor: '#D9D9D9',
+              width: '93%',
+              margin:3,
+              marginStart:15,
+              height: 1,
+            }} />
         </View>
     )
 }
@@ -28,9 +37,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     icon: {
-        width: 30,
-        height: 29,
-        margin: 10,
+        flex:1,
         resizeMode: 'contain',
         position: 'absolute'
     },
@@ -58,4 +65,4 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
       },
 });
-export default HomeScreeenGroupsComponent;
+export default VendorListComponent;

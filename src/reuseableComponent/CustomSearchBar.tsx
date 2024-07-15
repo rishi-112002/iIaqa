@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { setDrawerOpen } from "../reducer/DrawerReducer";
+import { RootState } from "../reducer/Store";
 
 function CustomSearchbar() {
     const navigation = useNavigation();
     const [searchQuery, setSearchQuery] = useState('');
     const [showOptions, setShowOptions] = useState(false);
-    const [showCross , setShowCross] = useState(false)
+    const [showCross, setShowCross] = useState(false)
+  
     const onChangeSearch = (query: any) => {
         setSearchQuery(query);
         setShowOptions(true);
@@ -23,7 +27,7 @@ function CustomSearchbar() {
         setShowOptions(false)
         setShowCross(false)
     }
-    const drawer =()=>{
+    const drawer = () => {
         navigation.dispatch(DrawerActions.openDrawer())
     }
 
@@ -44,7 +48,7 @@ function CustomSearchbar() {
                     value={searchQuery}
                     style={styles.searchbar}
                 />
-              { showCross && <TouchableOpacity onPress={handleCrossPress} style={{ height:'100%' ,justifyContent:'center' , width:'9.8%' }}>
+                {showCross && <TouchableOpacity onPress={handleCrossPress} style={{ height: '100%', justifyContent: 'center', width: '9.8%' }}>
                     <Image
                         source={require("../../src/assests/images/crossIcon.png")}
                         style={{
@@ -52,7 +56,7 @@ function CustomSearchbar() {
                             height: 15,
                             resizeMode: 'contain',
                             tintColor: '#1581FF',
-                           
+
                         }}
                     />
                 </TouchableOpacity>}
@@ -84,9 +88,9 @@ function CustomSearchbar() {
 
 const styles = StyleSheet.create({
     container: {
-        paddingRight:13,
-        paddingLeft:13,
-        paddingTop:5
+        paddingRight: 13,
+        paddingLeft: 13,
+        paddingTop: 5
     },
     searchContainer: {
         flexDirection: 'row',

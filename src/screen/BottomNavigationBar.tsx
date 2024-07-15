@@ -4,43 +4,33 @@ import { useTheme } from '@react-navigation/native';
 import WelcomeScreen from "./authenticate/SplashScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Drawer from "./drawerScreen/Drawer";
-import Home from "./tabScreen/Home";
 import GroupScreen from "./tabScreen/GroupScreen";
 import ChatScreen from "./tabScreen/ChatScreen";
-import { DrawerContext } from "../DrowerContext";
+import { useSelector } from "react-redux";
+import { RootState } from "../reducer/Store";
+
 const Tab = createBottomTabNavigator();
+
 export function BottomNavigationBar() {
-    const { colors, dark } = useTheme();
+    const isDrawerOpen = useSelector((state: RootState) => state.drawer.isDrawerOpen);
+    const { colors } = useTheme();
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            style={{ flex: 1 }}
+            style={styles.keyboardAvoidingView}
         >
-              <Tab.Navigator
+            <Tab.Navigator
                 initialRouteName="Home"
                 screenOptions={{
                     tabBarStyle: {
-                        position: "absolute",
-                        bottom: 5,
-                        left: 10,
-                        right: 10,
-                        borderRadius: 20,
-                        backgroundColor: "#D3E3F6",
+                        ...styles.tabBarStyle,
+                        display: isDrawerOpen ? 'flex' : "none",
                         borderColor: colors.background,
-                        paddingBottom: 3,
-                        shadowColor: "#7F5DF0",
-                        shadowOffset: {
-                            width: 0,
-                            height: 10,
-                        },
-                        shadowOpacity: 0.25,
-                        shadowRadius: 3.5,
-                        elevation: 5,
                     },
                     tabBarActiveTintColor: "#0077FF",
                     tabBarInactiveTintColor: 'pink',
                     tabBarLabel: ({ focused }) => (
-                        <Text style={{ fontSize: 1, color: focused ? "#0077FF" : "white" }}>
+                        <Text style={[styles.tabBarLabel, { color: focused ? "#0077FF" : "white" }]}>
                             YourTabLabel
                         </Text>
                     ),
@@ -48,125 +38,123 @@ export function BottomNavigationBar() {
                 }}
             >
                 <Tab.Screen
-                    name="0"
+                    name="HomeScreen"
                     component={Drawer}
-
                     options={{
-                        tabBarLabel: ({ focused }) => (
-                            <Text style={{ fontSize: 12, color: focused ? "#0077FF" : colors.text }}>
-
-                            </Text>
-                        ),
                         tabBarIcon: ({ focused }) => (
-                            <View style={{ alignItems: 'center' }}>
+                            <View style={styles.tabBarIconContainer}>
                                 <Image
                                     source={require("../../src/assests/images/ant-design_home-filled.png")}
-                                    style={{
+                                    style={[styles.tabBarIcon, {
                                         height: focused ? 28 : 24,
                                         width: focused ? 40 : 35,
-                                        resizeMode: 'contain',
-                                        marginTop: 5,
                                         tintColor: focused ? "#1D71D4" : "#5E5C5C"
-                                    }}
+                                    }]}
                                 />
+                                {focused && <View style={styles.focusedIndicator} />}
                             </View>
                         ),
                         headerShown: false
-                    }} />
-
+                    }}
+                />
                 <Tab.Screen
-                    name="Search"
+                    name="Service and Repair"
                     component={WelcomeScreen}
                     options={{
-                        tabBarLabel: ({ focused }) => (
-                            <Text style={{ fontSize: 12, color: focused ? "#0077FF" : colors.text }}>
-
-                            </Text>
-                        ),
                         tabBarIcon: ({ focused }) => (
-                            <Image source={require("../../src/assests/images/Group.png")}
-                                style={{
-                                    height: focused ? 28 : 24,
-                                    width: focused ? 40 : 35,
-                                    resizeMode: 'contain',
-                                    marginTop: 5,
-                                    tintColor: focused ? "#1D71D4" : "#5E5C5C"
-                                }} />
-
+                            <View style={styles.tabBarIconContainer}>
+                                <Image
+                                    source={require("../../src/assests/images/Group.png")}
+                                    style={[styles.tabBarIcon, {
+                                        height: focused ? 28 : 24,
+                                        width: focused ? 40 : 35,
+                                        tintColor: focused ? "#1D71D4" : "#5E5C5C"
+                                    }]}
+                                />
+                                {focused && <View style={styles.focusedIndicator} />}
+                            </View>
                         ),
                         headerShown: false
-                    }} />
+                    }}
+                />
                 <Tab.Screen
-                    name="AddPost"
+                    name="funnny"
                     component={WelcomeScreen}
                     options={{
-                        tabBarLabel: ({ focused }) => (
-                            <Text style={{ fontSize: 12, color: focused ? "#0077FF" : colors.text }}>
-
-                            </Text>
-                        ),
-
                         tabBarIcon: ({ focused }) => (
-                            <Image source={require("../../src/assests/images/healthicons_happy.png")}
-                                style={{
-                                    height: focused ? 28 : 24,
-                                    width: focused ? 40 : 35,
-                                    resizeMode: 'contain',
-                                    marginTop: 5,
-                                    tintColor: focused ? "#1D71D4" : "#5E5C5C"
-                                }} />
-
+                            <View style={styles.tabBarIconContainer}>
+                                <Image
+                                    source={require("../../src/assests/images/healthicons_happy.png")}
+                                    style={[styles.tabBarIcon, {
+                                        height: focused ? 28 : 24,
+                                        width: focused ? 40 : 35,
+                                        tintColor: focused ? "#1D71D4" : "#5E5C5C"
+                                    }]}
+                                />
+                                {focused && <View style={styles.focusedIndicator} />}
+                            </View>
                         ),
                         headerShown: false
-                    }} />
-
+                    }}
+                />
                 <Tab.Screen
-                    name="Library"
+                    name="Groups"
                     component={GroupScreen}
                     options={{
-                        tabBarLabel: ({ focused }) => (
-                            <Text style={{ fontSize: 12, color: focused ? "#0077FF" : colors.text }}>
-                            </Text>
-                        ),
                         tabBarIcon: ({ focused }) => (
-                            <Image source={require("../../src/assests/images/fluent_building-people-20-filled.png")}
-                                style={{
-                                    height: focused ? 28 : 24,
-                                    width: focused ? 40 : 35,
-                                    resizeMode: 'contain',
-                                    marginTop: 5,
-                                    tintColor: focused ? "#1D71D4" : "#5E5C5C"
-                                }} />
+                            <View style={styles.tabBarIconContainer}>
+                                <Image
+                                    source={require("../../src/assests/images/fluent_building-people-20-filled.png")}
+                                    style={[styles.tabBarIcon, {
+                                        height: focused ? 28 : 24,
+                                        width: focused ? 40 : 35,
+                                        tintColor: focused ? "#1D71D4" : "#5E5C5C"
+                                    }]}
+                                />
+                                {focused && <View style={styles.focusedIndicator} />}
+                            </View>
                         ),
                         headerShown: false
-                    }} />
+                    }}
+                />
                 <Tab.Screen
-                    name="Account"
+                    name="Chat"
                     component={ChatScreen}
                     options={{
-                        tabBarLabel: ({ focused }) => (
-                            <Text style={{ fontSize: 12, color: focused ? "#0077FF" : colors.text }}>
-
-                            </Text>
-                        ),
                         tabBarIcon: ({ focused }) => (
-                            <Image source={require("../../src/assests/images/flowbite_messages-solid.png")}
-                                style={{
-                                    height: focused ? 28 : 24,
-                                    width: focused ? 40 : 35,
-                                    resizeMode: 'contain',
-                                    marginTop: 5,
-                                    tintColor: focused ? "#1D71D4" : "#5E5C5C"
-                                }} />
+                            <View style={styles.tabBarIconContainer}>
+                                <Image
+                                    source={require("../../src/assests/images/flowbite_messages-solid.png")}
+                                    style={[styles.tabBarIcon, {
+                                        height: focused ? 28 : 24,
+                                        width: focused ? 40 : 35,
+                                        tintColor: focused ? "#1D71D4" : "#5E5C5C"
+                                    }]}
+                                />
+                                {focused && <View style={styles.focusedIndicator} />}
+                            </View>
                         ),
                         headerShown: false
-                    }} />
+                    }}
+                />
             </Tab.Navigator>
         </KeyboardAvoidingView>
     );
 }
-const style = StyleSheet.create({
-    shadow: {
+
+const styles = StyleSheet.create({
+    keyboardAvoidingView: {
+        flex: 1,
+        zIndex: 50,
+    },
+    tabBarStyle: {
+        position: "absolute",
+        bottom: 10,
+        left: 10,
+        right: 10,
+        borderRadius: 20,
+        backgroundColor: "#D3E3F6",
+        paddingBottom: 3,
         shadowColor: "#7F5DF0",
         shadowOffset: {
             width: 0,
@@ -174,6 +162,25 @@ const style = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.5,
-        elevation: 5
-    }
-})
+        elevation: 5,
+    },
+    tabBarLabel: {
+        fontSize: 1,
+    },
+    tabBarIconContainer: {
+        alignItems: 'center',
+        flexDirection: 'column',
+    },
+    tabBarIcon: {
+        resizeMode: 'contain',
+        marginTop: 5,
+        marginBottom: 3,
+    },
+    focusedIndicator: {
+        backgroundColor: '#1D71D4',
+        height: 2,
+        width: 24,
+    },
+});
+
+export default BottomNavigationBar;

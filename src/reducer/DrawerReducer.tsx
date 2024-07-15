@@ -1,18 +1,17 @@
+import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-    isDrawerOpen: false,
-  };
-  
-  const drawerReducer = (state = initialState, action: { type: any; payload: any; }) => {
-    switch (action.type) {
-      case 'SET_DRAWER_OPEN':
-        return {
-          ...state,
-          isDrawerOpen: action.payload,
-        };
-      default:
-        return state;
-    }
-  };
-  
-  export default drawerReducer;
+export const drawerSlice = createSlice({
+  name: 'drawer',
+  initialState: {
+    isDrawerOpen: true,
+  },
+  reducers: {
+    setDrawerOpen: (state, action) => {
+      state.isDrawerOpen = action.payload;
+    },
+  },
+});
+
+export const { setDrawerOpen } = drawerSlice.actions;
+
+export default drawerSlice.reducer;

@@ -1,0 +1,24 @@
+  const NeighboursData = [
+    {
+      title: "Aparna Hills",
+      data: [
+        { id: '1', imagePath: "https://s3-alpha-sig.figma.com/img/b25b/e562/bb82cdf8603e37ade8ac3f442f901466?Expires=1721606400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=YtMk9anc2KypMNdljSApem0exmEvLRu-9SkwYpWeJ5oZHYi6PCRqbNVMdBJfvYG5v1cJVoqtr~1u7gmWWHehXfIIZFGAr~gZQqckD4MjfX8o3hE8C6eEn1HAAVuK~csLSjFKFSKFhAn~TITK4OZDBMVj4yPHWEcceMAH8UuO-~nX0bEEX80k8PwEO~TbqDTUMS0hK5AG2sYPTqE8sMy8mY8418Wf~7JbmLMV4X6BWCxkexuJs5jNUOVPMFfbngNxYZM1ZCFnNWVi40fJ8gFSL-pYrznZDch16x-INLCaD2tDqtxVrqFe~1TzMhNHcTwc-P1muMZ9XeEs3~jSbih5AA__", name: 'Sruti S', flat: 'B207', mobile: '+91 93 XXXXXXXXX', address: 'Marigold Street, Hyderabad', occupation: 'Home Chef', company: 'Sruti’s Cloud Kitchen', bloodGroup: 'B+', mutualGroups: '4' },
+        { id: '2', imagePath: "https://s3-alpha-sig.figma.com/img/1ba8/f7dd/c1723a3623d0bce6f173f7ae5f24ee3f?Expires=1721606400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=eBCJ3ZKynLybYyr4odUW2CGPZIpzy2TEt9qqn-rP0Y9IiZUIc7YhHImH~nreJt1b9dKN55jadyBTfEf0CrqSmQ3-IKwWVEl7LDh8EHi-L66sSNRgbgK5YaKJPvrYD7SObI1k2qKbsVFCMvGqp5a~2fC8iFC5QY4~N3WssUe6xdHb12F-rizLxS2SUzIxPo6xJPBNSVLjPxdCn8USSJ-9DoctVVG4hChFH3ObUKk5P4KQfea8~zMQQKsjgo4XRb~c0aVOKMy8ftqkAeOebpe~6kUXECCqer2XThVkITTc5iZa4R9cDroHCDkU5veqmLHZ64iblP~3Swq98SYIMGeHeQ__", name: 'Name 2', flat: 'A202', mobile: '+91 91 XXXXXXXXX', address: 'Rose Street, Hyderabad', occupation: 'Engineer', company: 'Tech Corp', bloodGroup: 'O+', mutualGroups: '5' },
+        { id: '3', imagePath: "https://s3-alpha-sig.figma.com/img/065b/a433/eaddc0ff2fe077479f7e480368befd14?Expires=1721606400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=lCRwqh8sICvNLGATcse-uK-49NyFOxRqsxjMMTnwqgJsFYnb1BJTGrA8G-iWcwKXE8EVVkcXykhBmPRKULWd1AydnircmPj-OpD1nbA7Gsz~-cmeEHgZz8w6MmWinrGoI-csT6yLyQvx7XQwN4b9gCz-nLTxwSatd8MYj-PLOvJ3tWcgK1Q3vi3r4FWgDfsykWnt-WNASdk7Tso7-eOkYmZSuB7CmgTjUxPTCAiLcd93oYCdd3ZgUrIqCp8FoE7COn9NWbqG1flJ-KHy~BtHTI9fDm3MfdvIyCVEFL4Hy5xfoPN40~OSw9VPD0pb~8A6kKYtE3s3Gg0jXyHmx4O8zA__", name: 'Sruti S', flat: 'B207', mobile: '+91 93 XXXXXXXXX', address: 'Marigold Street, Hyderabad', occupation: 'Home Chef', company: 'Sruti’s Cloud Kitchen', bloodGroup: 'B+', mutualGroups: '4' },      
+        { id: '4', imagePath: "https://s3-alpha-sig.figma.com/img/b25b/e562/bb82cdf8603e37ade8ac3f442f901466?Expires=1721606400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=YtMk9anc2KypMNdljSApem0exmEvLRu-9SkwYpWeJ5oZHYi6PCRqbNVMdBJfvYG5v1cJVoqtr~1u7gmWWHehXfIIZFGAr~gZQqckD4MjfX8o3hE8C6eEn1HAAVuK~csLSjFKFSKFhAn~TITK4OZDBMVj4yPHWEcceMAH8UuO-~nX0bEEX80k8PwEO~TbqDTUMS0hK5AG2sYPTqE8sMy8mY8418Wf~7JbmLMV4X6BWCxkexuJs5jNUOVPMFfbngNxYZM1ZCFnNWVi40fJ8gFSL-pYrznZDch16x-INLCaD2tDqtxVrqFe~1TzMhNHcTwc-P1muMZ9XeEs3~jSbih5AA__", name: 'Name 2', flat: 'A202', mobile: '+91 91 XXXXXXXXX', address: 'Rose Street, Hyderabad', occupation: 'Engineer', company: 'Tech Corp', bloodGroup: 'O+', mutualGroups: '5' },
+        { id: '5', imagePath: "https://s3-alpha-sig.figma.com/img/f71c/edeb/a0b6e52fe9de73092878e69c0065384d?Expires=1721606400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=LUyY2gOIvIuuPPGVyOKWYR9SniMZ-q55Zcvpmw9f8LGa39QHk1eij58lPl1ZnP9lluabzoVqqIcvizkQPOzJspd2tTfQMB~hEQGHxs4xDQuofccZSwC6BY-DA3nU0pmc8NJwx8oRPvS7cjmKuXTIxSb4Lb2da53GmC~AKjnZK82YgvM7r3JhV77B93rrumZilSbuDI0Y6z9b66mVFn9j-A-1rbam6wooYUH9i2bXXjwLZv~B5CFJTTAGKd9flqDEM25tV5JXcZ~9Y-E-DfVzAwasj2kP~Q~~Ndrre4yOIHEqWsbGESfG~Ylj8ZQDgze0zfawR747rXUcNkU1MTkZPQ__", name: 'Name 2', flat: 'A202', mobile: '+91 91 XXXXXXXXX', address: 'Rose Street, Hyderabad', occupation: 'Engineer', company: 'Tech Corp', bloodGroup: 'O+', mutualGroups: '5' },
+      ]
+    },
+    {
+      title: "Reverie Garden",
+      data: [
+        { id: '6', imagePath: "", name: 'Name 4', flat: 'D404', mobile: '+91 95 XXXXXXXXX', address: 'Tulip Street, Hyderabad', occupation: 'Teacher', company: 'Education Board', bloodGroup: 'AB-', mutualGroups: '2' },
+        { id: '7',imagePath: "", name: 'Name 3', flat: 'C303', mobile: '+91 94 XXXXXXXXX', address: 'Lily Street, Hyderabad', occupation: 'Doctor', company: 'Health Care', bloodGroup: 'A+', mutualGroups: '3' },
+        { id: '8', imagePath: "", name: 'Name 4', flat: 'D404', mobile: '+91 95 XXXXXXXXX', address: 'Tulip Street, Hyderabad', occupation: 'Teacher', company: 'Education Board', bloodGroup: 'AB-', mutualGroups: '2' },
+        { id: '9',imagePath: "", name: 'Name 3', flat: 'C303', mobile: '+91 94 XXXXXXXXX', address: 'Lily Street, Hyderabad', occupation: 'Doctor', company: 'Health Care', bloodGroup: 'A+', mutualGroups: '3' },
+        { id: '10',imagePath:"", name: 'Name 3', flat: 'C303', mobile: '+91 94 XXXXXXXXX', address: 'Lily Street, Hyderabad', occupation: 'Doctor', company: 'Health Care', bloodGroup: 'A+', mutualGroups: '3' },
+      ]
+    }
+  ];
+  
+  export default NeighboursData;
